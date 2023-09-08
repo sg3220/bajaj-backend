@@ -10,6 +10,7 @@ App.get("/", (req, res) => {
 App.get("/bfhl", (req, res) => {
   res.status(200).json({ operation_code: 1 });
 });
+
 App.post("/bfhl", (req, res) => {
   const arrayData = req.body.data;
 
@@ -17,11 +18,11 @@ App.post("/bfhl", (req, res) => {
   let alphabetArray = [];
 
   for (let i = 0; i < arrayData.length; i++) {
-    if (!isNaN(parseInt(arrayData[i]))) {
-      numberArray.push(parseInt(arrayData[i]));
+    if (arrayData[i].charCodeAt(0) > 47 && arrayData[i].charCodeAt(0) < 58) {
+      numberArray.push(arrayData[i]);
     } else if (
-      typeof arrayData[i] === "string" &&
-      arrayData[i].match(/[a-zA-Z]/)
+      (arrayData[i].charCodeAt(0) > 64 && arrayData[i].charCodeAt(0) < 91) ||
+      (arrayData[i].charCodeAt(0) > 96 && arrayData[i].charCodeAt(0) < 123)
     ) {
       alphabetArray.push(arrayData[i]);
     }
