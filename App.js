@@ -27,19 +27,15 @@ App.all("/bfhl", (req, res) => {
       }
     }
 
-    let copyAlphabetArray = alphabetArray;
+    let highestAplhabetIndex = -1;
 
-    const alphabet = "abcdefghijklmnopqrstuvwxyz";
-
-    const highestAplhabet = copyAlphabetArray.reduce(
-      (prevChar, currentChar) => {
-        if (alphabet.indexOf(currentChar) > alphabet.indexOf(prevChar)) {
-          return currentChar;
-        } else {
-          return prevChar;
-        }
+    for (let i = 0; i < alphabetArray.length; i++) {
+      if (alphabetArray[i].charCodeAt(0) > highestAplhabetIndex) {
+        highestAplhabetIndex = i;
       }
-    );
+    }
+
+    const highestAplhabet = alphabetArray[highestAplhabetIndex];
 
     res.status(200).json({
       is_success: true,
